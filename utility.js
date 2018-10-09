@@ -81,9 +81,13 @@ const filterLiveChannels = (channelsList) => {
 	
 	return Promise.all(promisesArr)
 	.then((res) => {
-		return res.filter((e) => e.data.stream).map((e) => {
-			return e.data.stream.channel.name;
-		});
+		return res.filter((e) => e.data.stream)
+							.map(({data}) => {
+								return {
+									name: data.stream.channel.name,
+									viewers: data.stream.viewers
+								};
+							});
 	});
 }
 
