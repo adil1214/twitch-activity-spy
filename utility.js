@@ -54,33 +54,29 @@ const twitch_kraken = axios.create({
 	}
 });
 
-const getFollowedChannels = (userName, offset = 0) => {
-	try {
-		return async twitch_kraken
-			.get(`/${userName}/follows/channels`, {
-				params: {
-					offset
-				}
-			})
-			.then((res) => {
-				if (res.data.follows.length === 0) {
-					return [];
-				}
-				else {
-					let promise = await getFollowedChannels(userName, offset + 100);
-					// await getFollowedChannels(userName, offset + 100).then((res) => res.data.follows).catch(e => e)
-					return [
-						...res.data.follows.map((obj) => obj.channel.display_name),
-						...(promise)
-					];
-				}
-			})
-			.catch((err) => {
-				throw err;
-			});
-	} catch (error) {
-	
-	}
+const getFollowedChannels = async (userName, offset = 0) => {
+	return twitch_kraken
+		.get(`/${userName}/follows/channels`, {
+			params: {
+				offset
+			}
+		})
+		.then((res) => {
+			if (res.data.follows.length === 0) {
+				return [];
+			}
+			else {
+				let fulfilledVal = getFollowedChannels(userName, offset + 100).then((res) => res.data.follows).catch(e => e);
+				// await getFollowedChannels(userName, offset + 100).then((res) => res.data.follows).catch(e => e)
+				return [
+					...res.data.follows.map((obj) => obj.channel.display_name),
+					... (fulfilledVal)
+				];
+			}
+		})
+		.catch((err) => {
+			throw err;
+		});
 };
 
 const testMe = (userName, offset = 100) => {
