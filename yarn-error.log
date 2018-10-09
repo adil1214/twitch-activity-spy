@@ -1,0 +1,36 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\ADIL\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
+
+PATH: 
+  C:\Program Files\cmder\bin;C:\Program Files\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Program Files\cmder\vendor\conemu-maximus5;C:\Program Files\cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files (x86)\Cuminas\Document Express DjVu Plug-in\;C:\PROGRAMDATA\ORACLE\JAVA\JAVAPATH;C:\Windows\SYSTEM32;C:\Windows;C:\Windows\SYSTEM32\WBEM;C:\Windows\SYSTEM32\WINDOWSPOWERSHELL\V1.0\;C:\PROGRAM FILES\BROADCOM\BROADCOM 802.11\DRIVER;C:\PROGRAM FILES\MICROSOFT DNX\DNVM\;C:\PROGRAM FILES\INTEL\WIFI\BIN\;C:\PROGRAM FILES\COMMON FILES\INTEL\WIRELESSCOMMON\;C:\PROGRAM FILES\MICROSOFT SQL SERVER\120\TOOLS\BINN\;C:\Program Files\WIDCOMM\Bluetooth Software\;C:\Program Files\WIDCOMM\Bluetooth Software\syswow64;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\MATLAB\R2016b\runtime\win64;C:\Program Files\MATLAB\R2016b\bin;C:\Program Files\MATLAB\R2016b\polyspace\bin;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Sublime Text 3;C:\Program Files (x86)\GNU\GnuPG\pub;C:\Program Files\PuTTY\;C:\MinGW\bin;C:\Program Files\LLVM\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\VideoLAN\VLC;C:\Program Files\Git\cmd;C:\Program Files\Microsoft VS Code\bin;C:\Users\ADIL\AppData\Local\Android\sdk\platform-tools;C:\Users\ADIL\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\ADIL\AppData\Local\Programs\Python\Python36\;C:\Program Files (x86)\Nmap;C:\Program Files\Microsoft VS Code\bin;C:\Users\ADIL\AppData\Roaming\npm;C:\Program Files\Heroku\bin;C:\Program Files\Docker Toolbox;C:\Users\ADIL\AppData\Local\Programs\Microsoft VS Code Insiders\bin\;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Program Files\cmder\
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  8.9.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (C:\Users\ADIL\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:126002:13)
+      at emitNone (events.js:106:13)
+      at Interface.emit (events.js:208:7)
+      at Interface._ttyWrite (readline.js:775:16)
+      at ReadStream.onkeypress (readline.js:160:10)
+      at emitTwo (events.js:126:13)
+      at ReadStream.emit (events.js:214:7)
+      at emitKeys (internal/readline.js:420:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1011:36)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

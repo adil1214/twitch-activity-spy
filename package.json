@@ -1,0 +1,17 @@
+{
+  "name": "invisible_bypass",
+  "author": "Adil",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "start-watch": "nodemon app.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "tmi.js": "^1.2.1"
+  }
+}
