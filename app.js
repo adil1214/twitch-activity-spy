@@ -1,5 +1,5 @@
 const tmi = require('tmi.js');
-const { getChatters, getRandomChatter, getFollowedChannels, filterLiveChannels } = require('./utility')
+const { getChatters, getFollowedChannels, filterLiveChannels, viewerInChannel } = require('./utility')
 
 
 const options = {
@@ -16,19 +16,52 @@ const options = {
 	channels: [ 'riotgames' ]
 };
 
-let followedChannels = ['stunt', 'shroud', 'nightblue3', 'loltyler1'];
+
+// ==========================================
+
+// getFollowedChannels(viewerName)
+// .then(res => {
+// 	// followedChannels = res;
+// 	console.log(`${viewerName} is following: `, res.length, ' channels');
+// 	filterLiveChannels(res)
+// 		.then((arr) => console.log(`followed channels liver rn: ${arr}`))
+// 		.catch(e => console.log('something went wrong'));
+
+// })
+// .catch(err => console.log(err));
 
 
-// const channelName = 'adilmnop';
-// let followedChannels = [];
-// getFollowedChannels(channelName)
-// 	.then(res => {
-// 		followedChannels = res;
-// 		console.log(`${channelName} is following: `, res.length, ' channels');
-// 	})
-// 	.catch(err => console.log(err));
+// // ==========================================
+// let followedChannels = ['stunt', 'shroud', 'nightblue3', 'loltyler1'];
+// filterLiveChannels(followedChannels).then((arr) => console.log(`followed channels liver rn: ${arr}`)).catch(e => console.log(e));
 
-filterLiveChannels(followedChannels).then((arr) => console.log(arr)).catch(e => e);
+
+// ==========================================
+// viewerInChannel('001162', 'nightblue3').then(res => console.log(res? 'he is':'he\'s not'));
+
+// followedChannels.forEach((channel) => {
+
+// })
+
+const viewerName = 'adilmnop';
+
+const main = async () => {
+	let channels = await getFollowedChannels(viewerName);
+	let liveChannels = await filterLiveChannels(channels);
+	let userFound = false;
+	let userFoundIn = '';
+	for (let e of liveChannels) {
+		if (await viewerInChannel(viewerName, e.channel)) {
+			userFoundIn = e.channel;
+			console.log(`${viewerName} found in ${e.channel}!!!!`);
+			return;
+		} else {
+			console.log(`${viewerName} not found in ${e.channel}`);
+		}
+	}
+};
+
+main();
 
 
 
@@ -57,7 +90,6 @@ filterLiveChannels(followedChannels).then((arr) => console.log(arr)).catch(e => 
 //   }
 // });
 
-// getChatters('riotgames').then(res => console.log(res));
 
 
 /* 
