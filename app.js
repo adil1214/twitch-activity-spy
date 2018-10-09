@@ -1,5 +1,6 @@
 const tmi = require('tmi.js');
-const { getFollowedChannels, filterLiveChannels, viewerInChannel } = require('./utility')
+const keys = require('./keys.js')
+const { getFollowedChannels, filterLiveChannels, viewerInChannel } = require('./utility');
 
 
 const options = {
@@ -9,10 +10,7 @@ const options = {
 	connection: {
 		reconnect: true
 	},
-	identity: {
-		username: 'thelazybot1',
-		password: 'oauth:y5pz9evrx5rieb3hz02o9ojsh42qrg'
-	},
+	identity: keys,
 	channels: [ 'riotgames' ]
 };
 
@@ -36,6 +34,9 @@ const viewerName = 'shroud';
 	}
 })();
 
+
+
+//=================================================================
 
 // const client = new tmi.client(options);
 // client.connect();
