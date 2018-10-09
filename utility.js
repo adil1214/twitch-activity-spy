@@ -43,53 +43,31 @@ const getRandomChatter = (channelName, opts = {}) => {
 	});
 };
 
-// TODO: incomplete! gotta implement the offset to get all the followed channels
-// lol nevermind, just check the "_links" property.
 
 const twitch_kraken = axios.create({
-	baseURL: 'https://api.twitch.tv/kraken//users',
+	baseURL: 'https://api.twitch.tv/kraken/users',
 	params: {
 		client_id: '5oi8aqqszxnpa5w2oxn99zsyby1ld2',
 		limit: 100
 	}
 });
 
-const getFollowedChannels = async (userName, offset = 0) => {
+const getFollowedChannels = (userName, offset = 0) => {
 	return twitch_kraken
 		.get(`/${userName}/follows/channels`, {
 			params: {
 				offset
 			}
 		})
-		.then((res) => {
+		.then(async (res) => {
 			if (res.data.follows.length === 0) {
 				return [];
 			}
 			else {
-				let fulfilledVal = getFollowedChannels(userName, offset + 100).then((res) => res.data.follows).catch(e => e);
-				// await getFollowedChannels(userName, offset + 100).then((res) => res.data.follows).catch(e => e)
-				return [
-					...res.data.follows.map((obj) => obj.channel.display_name),
-					... (fulfilledVal)
-				];
+				return res.data.follows.map((obj) => obj.channel.display_name)
+					.concat(await getFollowedChannels(userName, offset + 100))
+				;
 			}
-		})
-		.catch((err) => {
-			throw err;
-		});
-};
-
-const testMe = (userName, offset = 100) => {
-	return twitch_kraken
-		.get(`/${userName}/follows/channels`, {
-			params: {
-				offset
-			}
-		})
-		.then((res) => {
-			console.log(res.data.follows[0].channel.display_name);
-			return res.data.follows
-				.map((obj) => obj.channel.display_name)
 		})
 		.catch((err) => {
 			throw err;
@@ -100,5 +78,4 @@ module.exports = {
 	getChatters,
 	getRandomChatter,
 	getFollowedChannels,
-	testMe
 };

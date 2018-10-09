@@ -1,5 +1,5 @@
 const tmi = require('tmi.js');
-const { getChatters, getRandomChatter, getFollowedChannels, testMe } = require('./utility')
+const { getChatters, getRandomChatter, getFollowedChannels } = require('./utility')
 
 
 const options = {
@@ -17,7 +17,7 @@ const options = {
 };
 
 getFollowedChannels('adilmnop')
-	.then(res => console.log('adilmnop is following: ', res.filter((e, i) => i>96), ' channels'))
+	.then(res => console.log('adilmnop is following: ', res.length, ' channels'))
 	.catch(err => console.log(err));
 
 
