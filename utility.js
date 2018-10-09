@@ -45,17 +45,17 @@ const getRandomChatter = (channelName, opts = {}) => {
 
 
 const twitch_kraken = axios.create({
-	baseURL: 'https://api.twitch.tv/kraken/users',
+	baseURL: 'https://api.twitch.tv/kraken',
 	params: {
-		client_id: '5oi8aqqszxnpa5w2oxn99zsyby1ld2',
-		limit: 100
+		client_id: '5oi8aqqszxnpa5w2oxn99zsyby1ld2'
 	}
 });
 
 const getFollowedChannels = (userName, offset = 0) => {
 	return twitch_kraken
-		.get(`/${userName}/follows/channels`, {
+		.get(`/users/${userName}/follows/channels`, {
 			params: {
+				limit: 100,
 				offset
 			}
 		})
@@ -65,8 +65,7 @@ const getFollowedChannels = (userName, offset = 0) => {
 			}
 			else {
 				return res.data.follows.map((obj) => obj.channel.display_name)
-					.concat(await getFollowedChannels(userName, offset + 100))
-				;
+					.concat(await getFollowedChannels(userName, offset + 100));
 			}
 		})
 		.catch((err) => {
@@ -74,8 +73,24 @@ const getFollowedChannels = (userName, offset = 0) => {
 		});
 };
 
+const filterLiveChannels = (channelsList) => {
+	 let promisesArr = channelsList.map((channelName, i) => {
+		return twitch_kraken
+		.get(`/streams/${channelName}`);
+	});
+	
+	return Promise.all(promisesArr)
+	.then((res) => {
+		return res.filter((e) => e.data.stream).map((e) => {
+			return e.data.stream.channel.name;
+		});
+	});
+}
+
+
 module.exports = {
 	getChatters,
 	getRandomChatter,
 	getFollowedChannels,
+	filterLiveChannels
 };

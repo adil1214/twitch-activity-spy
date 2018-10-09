@@ -1,5 +1,5 @@
 const tmi = require('tmi.js');
-const { getChatters, getRandomChatter, getFollowedChannels } = require('./utility')
+const { getChatters, getRandomChatter, getFollowedChannels, filterLiveChannels } = require('./utility')
 
 
 const options = {
@@ -16,9 +16,20 @@ const options = {
 	channels: [ 'riotgames' ]
 };
 
-getFollowedChannels('adilmnop')
-	.then(res => console.log('adilmnop is following: ', res.length, ' channels'))
-	.catch(err => console.log(err));
+let followedChannels = ['stunt', 'shroud', 'nightblue3', 'loltyler1'];
+
+
+// const channelName = 'adilmnop';
+// let followedChannels = [];
+// getFollowedChannels(channelName)
+// 	.then(res => {
+// 		followedChannels = res;
+// 		console.log(`${channelName} is following: `, res.length, ' channels');
+// 	})
+// 	.catch(err => console.log(err));
+
+filterLiveChannels(followedChannels).then((arr) => console.log(arr)).catch(e => e);
+
 
 
 // const client = new tmi.client(options);
