@@ -96,7 +96,7 @@ const filterLiveChannels = (channelsList) => {
 const viewerInChannel = (viewer, channel) => {
 	return getChatters(channel)
 		.then((res) => {
-			return res.includes(viewer);
+			return res.includes(viewer.toLowerCase());
 		})
 		.catch((e) => {
 			console.log(e)

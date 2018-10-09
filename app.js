@@ -1,5 +1,5 @@
 const tmi = require('tmi.js');
-const { getChatters, getFollowedChannels, filterLiveChannels, viewerInChannel } = require('./utility')
+const { getFollowedChannels, filterLiveChannels, viewerInChannel } = require('./utility')
 
 
 const options = {
@@ -17,35 +17,10 @@ const options = {
 };
 
 
-// ==========================================
+//=================================================================
+const viewerName = 'shroud';
 
-// getFollowedChannels(viewerName)
-// .then(res => {
-// 	// followedChannels = res;
-// 	console.log(`${viewerName} is following: `, res.length, ' channels');
-// 	filterLiveChannels(res)
-// 		.then((arr) => console.log(`followed channels liver rn: ${arr}`))
-// 		.catch(e => console.log('something went wrong'));
-
-// })
-// .catch(err => console.log(err));
-
-
-// // ==========================================
-// let followedChannels = ['stunt', 'shroud', 'nightblue3', 'loltyler1'];
-// filterLiveChannels(followedChannels).then((arr) => console.log(`followed channels liver rn: ${arr}`)).catch(e => console.log(e));
-
-
-// ==========================================
-// viewerInChannel('001162', 'nightblue3').then(res => console.log(res? 'he is':'he\'s not'));
-
-// followedChannels.forEach((channel) => {
-
-// })
-
-const viewerName = 'adilmnop';
-
-const main = async () => {
+(async () => {
 	let channels = await getFollowedChannels(viewerName);
 	let liveChannels = await filterLiveChannels(channels);
 	let userFound = false;
@@ -59,10 +34,7 @@ const main = async () => {
 			console.log(`${viewerName} not found in ${e.channel}`);
 		}
 	}
-};
-
-main();
-
+})();
 
 
 // const client = new tmi.client(options);
@@ -92,29 +64,3 @@ main();
 
 
 
-/* 
-client.on('chat', (channel, user, message, self) => {
-	// Don't listen to my own messages..
-  if (self) return;
-
-  if (channel === "#lohpally") {
-    console.log(`${user.username}: ${message}`)
-  }
-  
-	// if (message === "LUL") {
-	//   client.color("Green");
-	//   client.action("ADILmnop", ":joy: :ok_hand:");
-	// }
-
-	// if (message === 'go away') {
-	// 	client
-	// 		.join('riotgames')
-	// 		.then(function(data) {
-	// 			console.log(data);
-	// 		})
-	// 		.catch(function(err) {
-	// 			console.log(err);
-	// 		});
-	// }
-});
-*/
