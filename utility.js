@@ -11,11 +11,12 @@ const getChatters = (channelName, _attemptCount = 0) => {
 				(p, [ type, list ]) =>
 					p.concat(
 						list.map((name) => {
-							if (name === channelName) type = 'broadcaster';
-							return { name, type };
+							// if (name === channelName) type = 'broadcaster';
+							// return { name, type };
+							return name;
 						})
 					),
-				[]
+				[]			// <= reduce's initial value
 			);
 		})
 		.catch((err) => {
@@ -64,7 +65,7 @@ const getFollowedChannels = (userName, offset = 0) => {
 				return [];
 			}
 			else {
-				return res.data.follows.map((obj) => obj.channel.display_name)
+				return res.data.follows.map((obj) => obj.channel.name)
 					.concat(await getFollowedChannels(userName, offset + 100));
 			}
 		})
@@ -84,17 +85,29 @@ const filterLiveChannels = (channelsList) => {
 		return res.filter((e) => e.data.stream)
 							.map(({data}) => {
 								return {
-									name: data.stream.channel.name,
+									channel: data.stream.channel.name,
 									viewers: data.stream.viewers
 								};
 							});
-	});
-}
+	})
+	.catch(e => console.log(e));
+};
+
+const viewerInChannel = (viewer, channel) => {
+	return getChatters(channel)
+		.then((res) => {
+			return res.includes(viewer);
+		})
+		.catch((e) => {
+			console.log(e)
+		})
+};
 
 
 module.exports = {
 	getChatters,
 	getRandomChatter,
 	getFollowedChannels,
-	filterLiveChannels
+	filterLiveChannels,
+	viewerInChannel
 };

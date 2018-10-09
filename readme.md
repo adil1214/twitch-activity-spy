@@ -11,8 +11,8 @@ this module helps you find him by looking at all his followed channles's viewer 
 ## TODO 
  - [x] getting list of followed channels by user.
  - [x] filtering live channels.
- - [ ] getting the list of current viewers for every channel.
- - [ ] finding user.
+ - [x] getting the list of current viewers (aka chatters) for every channel.
+ - [x] finding user.
  - [ ] setting a tmijs "part" event listener.
 
 
